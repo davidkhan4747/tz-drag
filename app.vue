@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <h1>Обращения</h1>
     <AppealList />
   </div>
 </template>

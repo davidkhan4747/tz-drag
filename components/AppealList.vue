@@ -3,7 +3,7 @@
     <div class="app-header">
       <div class="app-title">
         <span>Games List</span>
-        <span class="badge">{{ rootAppeals.length }}</span>
+        <span class="badge"> Found : {{ rootAppeals.length }}</span>
       </div>
       <div class="controls">
         <button @click="store.undo()" :disabled="!canUndo" class="control-button">
@@ -46,9 +46,6 @@
           <tr v-else>
             <td colspan="5">
               <div class="empty-state">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 9h-2V8h2v4zm0 4h-2v-2h2v2z" fill="currentColor"/>
-                </svg>
                 <h3>No games</h3>
                 <p>To get started, add a new game by clicking the button above</p>
               </div>
@@ -158,7 +155,8 @@ const handleDrop = (targetAppeal: Appeal, position: 'before' | 'after' | 'inside
 
 <style scoped>
 .app-container {
-  max-width: 1200px;
+  max-width: 1656px;
+  width: 100%;
   margin: 0 auto;
   padding: 20px;
 }
@@ -243,10 +241,12 @@ const handleDrop = (targetAppeal: Appeal, position: 'before' | 'after' | 'inside
   overflow: auto;
   margin-bottom: 20px;
   max-height: 70vh;
+  width: 100%;
 }
 
 .table {
   width: 100%;
+  min-width: 900px; /* Ensures the table doesn't get too small on smaller screens */
   border-collapse: collapse;
 }
 

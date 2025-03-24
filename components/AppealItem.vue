@@ -17,7 +17,6 @@
     <!-- Number -->
     <td class="number-cell">
       <div class="handle-wrapper">
-        <span class="drag-handle">☰</span>
         {{ getDisplayNumber() }}
       </div>
     </td>
@@ -52,6 +51,7 @@
     <td class="actions-cell">
       <div class="actions">
         <div class="action-controls">
+          <span v-if="hasChildren" class="file-count">{{ childCount }}</span>
           <span v-if="hasChildren" class="folder-toggle" @click="toggleExpand">
             <svg v-if="isExpanded" class="folder-icon" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 1L5 5L9 1" stroke="#E5EDFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -151,6 +151,11 @@ const childrenTitles = computed(() =>
     ? props.appeal.children!.map(child => child.title).join(' / ')
     : ''
 );
+
+const childCount = computed(() => {
+  if (!hasChildren.value) return 0;
+  return props.appeal.children!.length;
+});
 
 // Format item number (like 2.1, 2.2 etc.)
 function getDisplayNumber() {
@@ -265,7 +270,7 @@ const onDrop = () => {
 .number-cell {
   width: 60px;
   white-space: nowrap;
-  color: #888888;
+  color: #ffffff;
   font-size: 13px;
 }
 
@@ -290,17 +295,33 @@ const onDrop = () => {
   text-overflow: ellipsis;
 }
 
+/* File count badge */
+.file-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  min-width: 24px;
+  padding: 0 8px;
+  background-color: #1E3C3C;
+  color: #58E2B0;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 30px;
+  margin-right: 8px;
+}
+
 /* Folder toggle */
 .folder-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
   margin-left: 8px;
   background-color: #725DF8;
-  border-radius: 4px;
+  border-radius: 30px;
   transition: background-color 0.2s;
 }
 
@@ -315,7 +336,7 @@ const onDrop = () => {
 /* Order cell */
 .order-cell {
   width: 80px;
-  color: #888888;
+  color: #ffffff;
   text-align: center;
 }
 
@@ -330,7 +351,7 @@ const onDrop = () => {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #888888;
+  color: #ffffff;
   font-size: 13px;
 }
 
@@ -354,18 +375,19 @@ const onDrop = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  background-color: transparent;
+  width: 32px;
+  height: 32px;
+  background-color: #282540;
   border: none;
-  border-radius: 4px;
-  color: #888888;
+  border-radius: 30px;
+  color: #725DF8;
   cursor: pointer;
+  transition: all 0.2s;
 }
 
 .actions-button:hover {
-  background-color: #3d4559;
-  color: #ffffff;
+  background-color: #725DF8;
+  color: #E5EDFF;
 }
 
 .actions-menu {
@@ -418,7 +440,8 @@ const onDrop = () => {
 /* Drag states */
 .is-dragging {
   z-index: 10;
-  opacity: 0.7;
+  opacity: 0.9;
+  background-color: #282540 !important;
 }
 
 /* Improved position indicators */
@@ -428,8 +451,8 @@ const onDrop = () => {
   position: absolute;
   left: 0;
   right: 0;
-  height: 2px;
-  background: #4a6dd8;
+  height: 3px;
+  background: #725DF8;
   border-radius: 2px;
   z-index: 5;
 }
@@ -443,7 +466,7 @@ const onDrop = () => {
 }
 
 .drag-over-inside {
-  background-color: #252525;
+  background-color: rgba(114, 93, 248, 0.1);
 }
 
 /* Responsive styles */
