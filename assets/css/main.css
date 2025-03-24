@@ -1,8 +1,13 @@
 :root {
-  --primary-color: #2196f3;
-  --background-color: #f5f5f5;
-  --text-color: #333;
-  --border-color: #e0e0e0;
+  --primary-color: #2d6fef;
+  --background-color: #121823;
+  --secondary-bg: #1b2433;
+  --text-color: #ffffff;
+  --text-secondary: #8b949e;
+  --border-color: #30363d;
+  --hover-bg: #242f3d;
+  --table-header-bg: #1b2433;
+  --item-hover: rgba(177, 186, 196, 0.12);
 }
 
 * {
@@ -19,10 +24,160 @@ body {
   line-height: 1.5;
 }
 
-button {
-  font-family: inherit;
+/* Основные стили для приложения */
+.app-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.app-title {
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge {
+  background-color: #2d6fef;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+/* Кнопки */
+button {
+  font-family: inherit;
+  background-color: var(--hover-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.2s;
+}
+
+button:hover:not(:disabled) {
+  background-color: #2d3846;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+}
+
+/* Таблица */
+.table-container {
+  background-color: var(--secondary-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  text-align: left;
+  padding: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 12px;
+}
+
+.table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table tr:hover {
+  background-color: var(--item-hover);
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Оформление для вложенных элементов */
+.indent {
+  padding-left: 24px;
+}
+
+/* Иконки */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  color: var(--text-secondary);
+}
+
+/* Меню действий */
+.actions {
+  position: relative;
+}
+
+.actions-button {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.actions-button:hover {
+  background-color: var(--hover-bg);
+  color: var(--text-color);
+}
+
+.actions-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: var(--secondary-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  min-width: 150px;
+}
+
+.action-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-item:hover {
+  background-color: var(--hover-bg);
+}
+
+/* Медиа-запросы */
 @media (min-width: 1024px) {
   .container {
     padding: 20px;

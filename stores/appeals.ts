@@ -245,11 +245,31 @@ export const useAppealsStore = defineStore('appeals', () => {
     state.appeals = next;
   }
 
+  /**
+   * Добавляет новый раздел
+   * @param appeal Новый раздел для добавления
+   */
+  function addAppeal(appeal: Appeal) {
+    // Сохраняем текущее состояние в историю для возможности отмены
+    state.history.past.push(JSON.parse(JSON.stringify(state.appeals)));
+    if (state.history.past.length > MAX_HISTORY_LENGTH) {
+      state.history.past = state.history.past.slice(-MAX_HISTORY_LENGTH);
+    }
+    state.history.future = [];
+    
+    // Добавляем новый раздел
+    state.appeals.push(appeal);
+    
+    // Сохраняем состояние в localStorage
+    saveStateToLocalStorage(state);
+  }
+
   return {
     appeals: computed(() => state.appeals),
     history: computed(() => state.history),
     setAppeals,
     moveAppeal,
+    addAppeal,
     undo,
     redo
   };
